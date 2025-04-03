@@ -9,7 +9,7 @@ bot = Bot(token=TBOTTOKEN)
 dp = Dispatcher()
 
 
-@dp.message()
+@dp.message(CommandStart)
 async def cmd_start(message: Message):
     await message.answer('Привет!')
     await message.reply('Как дела?')
