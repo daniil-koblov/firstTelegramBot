@@ -1,5 +1,5 @@
 from aiogram import F, Router
-from aiogram.types import Message
+from aiogram.types import Message, CallbackQuery
 from aiogram.filters import CommandStart, Command
 
 import app.keyboards as kb
@@ -22,3 +22,9 @@ async def cmd_help(message: Message):
 async def catalog(message: Message):
     await message.answer('Выберите категорию товара',
                          reply_markup=kb.catalog)
+
+
+@router.callback_query(F.data == 't-shirt')
+async def t_shirt(callback: CallbackQuery):
+    await callback.answer('Вы выбрали категорию.')
+    await callback.message.answer('Вы выбрали категорию с футболками.')
