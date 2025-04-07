@@ -40,3 +40,10 @@ async def category(callback: CallbackQuery):
                                   f'Цена: {item_data.price}$',
                                   reply_markup=await
                                   kb.items(callback.data.split('_')[1]))
+
+
+@router.callback_query(F.data.startswith('to_main'))
+async def to_main(callback: CallbackQuery):
+    await callback.answer('Вы вернулись в меню')
+    await callback.message.answer('Добро пожаловать в магазин кроссовок!',
+                                  reply_markup=kb.main)
