@@ -14,12 +14,21 @@ main = ReplyKeyboardMarkup(keyboard=[[KeyboardButton(text='Каталог')],
                            )
 
 
+async def contacts():
+    keyboard = InlineKeyboardBuilder()
+    keyboard.add(InlineKeyboardButton(text='Страница владельца в "VK"',
+                                      url='https://vk.com/creator_my_life'))
+    keyboard.add(InlineKeyboardButton(text='Контакт владельца в "Telegram"',
+                                      url='https://t.me/Hug0StiglitZ'))
+    return keyboard.adjust(1).as_markup()
+
+
 async def categories():
     all_categories = await get_categories()
     keyboard = InlineKeyboardBuilder()
     for category in all_categories:
         keyboard.add(InlineKeyboardButton(text=category.name,
-                                           callback_data=f"category_{category.id}"))
+                                          callback_data=f"category_{category.id}"))
     keyboard.add(InlineKeyboardButton(text='На главную',
                                       callback_data='to_main'))
     return keyboard.adjust(2).as_markup()
@@ -30,8 +39,7 @@ async def items(category_id):
     keyboard = InlineKeyboardBuilder()
     for item in all_items:
         keyboard.add(InlineKeyboardButton(text=item.name,
-                                           callback_data=f"item_{item.id}"))
+                                          callback_data=f"item_{item.id}"))
     keyboard.add(InlineKeyboardButton(text='На главную',
                                       callback_data='to_main'))
     return keyboard.adjust(2).as_markup()
-

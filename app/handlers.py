@@ -23,6 +23,17 @@ async def catalog(message: Message):
                          reply_markup=await kb.categories())
 
 
+@router.message(F.text == 'Контакты')
+async def catalog(message: Message):
+    await message.answer('Контактная информация магазина.',
+                                  reply_markup=await kb.contacts())
+
+
+@router.message(F.text == 'О нас')
+async def catalog(message: Message):
+    await message.answer('Реквизиты магазина.')
+
+
 @router.callback_query(F.data.startswith('category_'))
 async def category(callback: CallbackQuery):
     await callback.answer('Вы выбрали категорию')
